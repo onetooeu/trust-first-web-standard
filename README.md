@@ -21,3 +21,8 @@
 
 ## Template
 This repo is intended to become a reference template for building trust-first sites.
+
+
+Official site: https://onetooeu.github.io/trust-first-web-standard/
+
+Latest release: link na Releases stránku
