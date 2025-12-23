@@ -30,10 +30,10 @@ def compute_score(features, params, model):
     ni = norm_inv_clip(features["incident_rate_30d"], model["normalization"]["incident_rate_30d"]["clip_max"])
 
     score = model["formula"]["base"]
-    score += params["w_signature"] * sig
-    score += params["w_continuity_days"] * nc
-    score += params["w_transparency_freshness"] * nf
-    score += params["w_incident_rate"] * ni
+    score += params.get("w_signature",0) * sig
+    score += params.get("w_continuity_days",0) * nc
+    score += params.get("w_transparency_freshness",0) * nf
+    score += params.get("w_incident_rate",0) * ni
     score = clip(score, 0.0, 1.0)
 
     # invariant: if signature invalid => cap

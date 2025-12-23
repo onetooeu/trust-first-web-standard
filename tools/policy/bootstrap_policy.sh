@@ -12,6 +12,6 @@ mkdir -p .well-known/policy .well-known/policy/sigs dumps dumps/sigs
 echo "OK: bootstrap_policy done"
 
 # ensure required params exist even if current.json already existed
-jq '.params |= (. // {}) | .params.w_signature |= (. // 1) | .params.w_domain |= (. // 1) | .params.w_history |= (. // 1) | .params.w_revocation |= (. // 1)' \
+jq '.params |= (. // {}) | .params.w_signature |= (. // 1) | .params.w_domain |= (. // 1) | .params.w_history |= (. // 1) | .params.w_revocation |= (. // 1) | .params.w_continuity_days |= (. // 0) |= (. // 1)' \
   .well-known/policy/current.json > .well-known/policy/current.json.tmp && \
 mv .well-known/policy/current.json.tmp .well-known/policy/current.json
