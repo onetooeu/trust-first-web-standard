@@ -1,0 +1,66 @@
+{
+  "schema": "tfws-ap.metrics.snapshot.v1",
+  "policy_id": "onetoo.eu/trust-policy",
+  "created_utc": "2025-12-23T19:07:44Z",
+  "dataset": {
+    "dataset_id": "ds-synthetic-001",
+    "dataset_hash_sha256": "8d73c3a9aef9dbf9ef3665c6e78813994c73836645f2ba1ba9471ecf203684a9",
+    "rows": 1000,
+    "label_definition": {
+      "positive": "trusted_should_allow",
+      "negative": "untrusted_should_deny"
+    }
+  },
+  "policies": {
+    "baseline": {
+      "policy_version": "1.0.0+2025-12-23.1",
+      "policy_current_hash_sha256": "12f9a35c196fabdef5ad47dabfaf6f60387fae4ee3d3b9f784cf04cb2ca10e12"
+    },
+    "candidate": {
+      "policy_version": "1.0.0+2025-12-23.2",
+      "policy_current_hash_sha256": "3f2213b0fa257d99167ada9068681cdff029f491360c3f22422628558585e45d"
+    }
+  },
+  "thresholds": {
+    "max_false_allow_rate": 0.02,
+    "max_false_deny_rate": 0.05,
+    "min_f1_improvement": 0.0
+  },
+  "metrics": {
+    "baseline": {
+      "false_allow_rate": 0.0,
+      "false_deny_rate": 0.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "counts": {
+        "tp": 500,
+        "fp": 0,
+        "tn": 500,
+        "fn": 0,
+        "pos": 500,
+        "neg": 500
+      }
+    },
+    "candidate": {
+      "false_allow_rate": 0.0,
+      "false_deny_rate": 0.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "counts": {
+        "tp": 500,
+        "fp": 0,
+        "tn": 500,
+        "fn": 0,
+        "pos": 500,
+        "neg": 500
+      }
+    }
+  },
+  "decision": {
+    "regression_ok": true,
+    "notes": "Deterministic propose_step evaluation."
+  },
+  "snapshot_hash_sha256": "08e16860a3f389c0da6e8766b78d0925d7f2fea0eb727004b187d2e5134fb520"
+}

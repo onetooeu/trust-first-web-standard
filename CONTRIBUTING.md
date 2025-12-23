@@ -1,16 +1,12 @@
-# Contributing to TFWS
+# Contributing
+Thank you for your interest in ONETOO.eu (operated by ONETOO.dynamics).
 
-TFWS is an open, vendor-neutral specification.
+## Principles
+- Prefer clarity over cleverness.
+- Keep public outputs explainable and auditable.
+- Preserve backward compatibility for public endpoints when possible.
+- Document changes in `api/v1/meta/changelog.json`.
 
-## How to contribute
-- Open an Issue for proposals, ambiguities, or errata.
-- Submit a Pull Request referencing the Issue.
-- Keep changes minimal and focused.
-
-## Editorial vs Normative changes
-- Editorial: typos, clarity, formatting.
-- Normative: changes to MUST/SHOULD requirements (needs discussion).
-
-## Style
-- Use RFC 2119 keywords consistently (MUST/SHOULD/MAY).
-- Prefer short sections and explicit paths.
+## Reporting issues
+- Security: security@onetoo.eu
+- Trust/Policy questions: trust@onetoo.eu

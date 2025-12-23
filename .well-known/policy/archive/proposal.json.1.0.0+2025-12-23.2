@@ -1,0 +1,42 @@
+{
+  "schema": "tfws-ap.policy.proposal.v1",
+  "policy_id": "onetoo.eu/trust-policy",
+  "created_utc": "2025-12-23T19:07:44Z",
+  "from_policy_version": "1.0.0+2025-12-23.1",
+  "to_policy_version": "1.0.0+2025-12-23.2",
+  "inputs": {
+    "bounds_version": "1.0.0",
+    "core_version": "1.0.0",
+    "metrics_snapshot_hash_sha256": "08e16860a3f389c0da6e8766b78d0925d7f2fea0eb727004b187d2e5134fb520"
+  },
+  "param_deltas": [
+    {
+      "name": "w_continuity_days",
+      "from": 0.2,
+      "to": 0.22,
+      "delta": 0.02
+    },
+    {
+      "name": "w_transparency_freshness",
+      "from": 0.1,
+      "to": 0.11,
+      "delta": 0.01
+    },
+    {
+      "name": "threshold_allow",
+      "from": 0.75,
+      "to": 0.74,
+      "delta": -0.01
+    }
+  ],
+  "validation": {
+    "bounds_ok": true,
+    "invariants_ok": true,
+    "max_param_delta_ok": true,
+    "regression_ok": true
+  },
+  "reasoning": {
+    "objective": "reduce_false_deny_rate",
+    "summary": "Candidate computed by deterministic propose_step; accept only if regression_ok."
+  }
+}

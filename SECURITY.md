@@ -1,12 +1,13 @@
 # Security Policy
+ONETOO.eu (operated by **ONETOO.dynamics**)
 
-TFWS itself is a document/specification, but we treat integrity as security-critical.
-
-## Reporting issues
-If you find a security issue affecting published artifacts, signatures, or reference implementation notes:
-- Open an Issue marked as "security" OR contact maintainers via the repository contact (if provided).
+## Reporting
+Please report security issues to: security@onetoo.eu
 
 ## Scope
-- Spec text integrity
-- Release artifacts
-- Reference implementation materials
+- Website and public endpoints
+- Integrity and signing controls
+- Redirect and abuse prevention layers
+
+## Disclosure
+We aim to acknowledge valid reports and coordinate a responsible disclosure timeline.

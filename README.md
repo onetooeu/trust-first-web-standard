@@ -1,28 +1,37 @@
-# Trust-First Web Standard (TFWS)
+# ONETOO.eu — AI Trust Hub
 
-**Status:** Draft (v1.0-draft)  
-**License:** CC0 1.0 Universal  
-**Goal:** Minimal, verifiable “trust surface” for web publishing (humans + agents).
+This repository is a **static, audit-friendly trust & governance hub** designed for:
+- AI agents (machine-readable trust manifest + OpenAPI)
+- partners/auditors (verification, integrity inventory, incident/changelog rails)
+- humans (clear landing pages)
 
-## Specification
-- TFWS 1.0 Draft: `spec/tfws-1.0-draft.md`
+## What this ships
 
-## Compliance Profiles
-- Core: `compliance/tfws-core.md`
-- Verified: `compliance/tfws-verified.md`
-- Archival: `compliance/tfws-archival.md`
+**Human entrypoints**
+- `/` (index)
+- `/ai-trust-hub.html`
+- `/verify.html`
 
-## Reference Implementation
-- `reference-implementation/onetoo.eu.md`
+**Machine entrypoints**
+- `/.well-known/ai-trust-hub.json`
+- `/.well-known/llms.txt`
+- `/.well-known/minisign.pub`
+- `/dumps/sha256.json` + `/dumps/sigs/*.minisig`
 
-## Governance
-- `governance/process.md`
-- `governance/versioning.md`
+## Golden rules (the “Mozart mode”)
 
-## Template
-This repo is intended to become a reference template for building trust-first sites.
+1. **Everything that matters is linkable** (stable URLs, no hidden knowledge).
+2. **Everything that ships is hashable** (`dumps/sha256.json`).
+3. **Everything that’s hashable is signable** (minisign signatures in CI).
+4. **Everything is machine-readable first** (JSON/OpenAPI), and human-friendly second.
 
+## Local workflow
 
-Official site: https://onetooeu.github.io/trust-first-web-standard/
+```bash
+python3 scripts/generate_dumps.py
+bash scripts/verify_local.sh
+```
 
-Latest release: link na Releases stránku
+## CI signing
+
+See `docs/CI-SIGNING.md`.

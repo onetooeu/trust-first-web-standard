@@ -1,0 +1,13 @@
+{
+  "ts_utc": "2025-12-23T19:07:53Z",
+  "policy_version": "1.0.0+2025-12-23.2",
+  "files": {
+    "current": ".well-known/policy/archive/current.json.1.0.0+2025-12-23.2",
+    "changelog": ".well-known/policy/archive/changelog.json.1.0.0+2025-12-23.2",
+    "metrics": ".well-known/policy/archive/metrics.snapshot.json.1.0.0+2025-12-23.2",
+    "proposal": ".well-known/policy/archive/proposal.json.1.0.0+2025-12-23.2",
+    "history": ".well-known/policy/archive/history.index.json.1.0.0+2025-12-23.2",
+    "audit": ".well-known/policy/archive/audit.merkle.json.1.0.0+2025-12-23.2",
+    "safety": ".well-known/policy/archive/safety.switches.json.1.0.0+2025-12-23.2"
+  }
+}

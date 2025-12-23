@@ -1,0 +1,20 @@
+{
+  "schema": "tfws-ap.safety.switches.v1",
+  "policy_id": "onetoo.eu/trust-policy",
+  "mode": "adaptive_enabled",
+  "allowed_modes": [
+    "adaptive_enabled",
+    "adaptive_paused",
+    "rollback_only"
+  ],
+  "pause_conditions": {
+    "max_regression_false_allow_rate": 0.02,
+    "max_regression_false_deny_rate": 0.05,
+    "detect_poisoning_signals": true
+  },
+  "rollback": {
+    "enabled": true,
+    "max_days_back": 14
+  },
+  "notes": "If poisoning suspected, switch to adaptive_paused."
+}
