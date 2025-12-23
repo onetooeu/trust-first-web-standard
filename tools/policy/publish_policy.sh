@@ -9,7 +9,7 @@ DUMPS_DIR="${DUMPS_DIR:-$BASE_DIR/dumps}"
 SIGS_DIR="${SIGS_DIR:-$POLICY_DIR/sigs}"
 
 MINISIGN_BIN="${MINISIGN_BIN:-minisign}"
-MINISIGN_SECRET="${MINISIGN_SECRET:-$BASE_DIR/.secrets/minisign.key}" # keep out of git
+MINISIGN_SECRET="${MINISIGN_SECRET:-$BASE_DIR/.secrets/minisign.key}"; [[ -f "$MINISIGN_SECRET" ]] || MINISIGN_SECRET="$HOME/.minisign/minisign.key" # keep out of git
 KID="${KID:-}" # optional: signer key id (e.g., k1-provider). If set, signatures become <file>.<kid>.minisig
 
 JQ="${JQ:-jq}"

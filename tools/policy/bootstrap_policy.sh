@@ -10,3 +10,8 @@ mkdir -p .well-known/policy .well-known/policy/sigs dumps dumps/sigs
 [ -f .well-known/policy/history.index.json ] || printf '%s\n' '{"schema":"tfws-ap.policy.history.index.v1","entries":[],"head":{"policy_version":"1.0.0+bootstrap","status":"baseline"}}' > .well-known/policy/history.index.json
 [ -f dumps/sha256.json ] || echo '{}' > dumps/sha256.json
 echo "OK: bootstrap_policy done"
+
+# ensure required params exist even if current.json already existed
+jq '.params |= (. // {}) | .params.w_signature |= (. // 1) | .params.w_domain |= (. // 1) | .params.w_history |= (. // 1) | .params.w_revocation |= (. // 1)' \
+  .well-known/policy/current.json > .well-known/policy/current.json.tmp && \
+mv .well-known/policy/current.json.tmp .well-known/policy/current.json
