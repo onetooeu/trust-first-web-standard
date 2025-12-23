@@ -84,7 +84,7 @@ def metrics_for(policy_params, model, dataset):
     }
 
 def within_bounds(params, bounds):
-    for k, r in bounds["params"].items():
+    for k, r in bounds.get("params", {}).items():
         if k not in params:
             return False
         if not (r["min"] <= params[k] <= r["max"]):
