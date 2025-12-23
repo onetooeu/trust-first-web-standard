@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-MINISIGN_KEY="${MINISIGN_KEY:-./.secrets/minisign.key}"
+MINISIGN_KEY="${MINISIGN_KEY:-"$MINISIGN_KEY"}"
 [[ -f "$MINISIGN_KEY" ]] || MINISIGN_KEY="$HOME/.minisign/minisign.key"
 set -euo pipefail
 
