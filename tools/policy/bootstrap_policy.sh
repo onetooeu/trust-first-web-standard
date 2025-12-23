@@ -11,7 +11,15 @@ mkdir -p .well-known/policy .well-known/policy/sigs dumps dumps/sigs
 [ -f dumps/sha256.json ] || echo '{}' > dumps/sha256.json
 echo "OK: bootstrap_policy done"
 
-# ensure required params exist even if current.json already existed
-jq '.params |= (. // {}) | .params.w_signature |= (. // 1) | .params.w_domain |= (. // 1) | .params.w_history |= (. // 1) | .params.w_revocation |= (. // 1) | .params.w_continuity_days |= (. // 0) |= (. // 1)' \
-  .well-known/policy/current.json > .well-known/policy/current.json.tmp && \
 mv .well-known/policy/current.json.tmp .well-known/policy/current.json
+
+# ensure required params exist even if current.json already existed
+tmp=".well-known/policy/current.json.tmp"
+jq '.params = (.params // {})
+    | .params.w_signature = (.params.w_signature // 1)
+    | .params.w_domain = (.params.w_domain // 1)
+    | .params.w_history = (.params.w_history // 1)
+    | .params.w_revocation = (.params.w_revocation // 1)
+    | .params.w_continuity_days = (.params.w_continuity_days // 0)
+    | .params.threshold_allow = (.params.threshold_allow // 0)
+  ' .well-known/policy/current.json > "$tmp" && mv "$tmp" .well-known/policy/current.json

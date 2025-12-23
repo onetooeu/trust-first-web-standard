@@ -43,9 +43,9 @@ def compute_score(features, params, model):
     return score
 
 def classify(score, params):
-    if score >= params["threshold_allow"]:
+    if score >= params.get("threshold_allow",0):
         return "allow"
-    if score <= params["threshold_deny"]:
+    if score <= params.get("threshold_deny",0):
         return "deny"
     return "caution"
 
