@@ -22,4 +22,9 @@ jq '.params = (.params // {})
     | .params.w_revocation = (.params.w_revocation // 1)
     | .params.w_continuity_days = (.params.w_continuity_days // 0)
     | .params.threshold_allow = (.params.threshold_allow // 0)
-  ' .well-known/policy/current.json > "$tmp" && mv "$tmp" .well-known/policy/current.json
+  ' .well-known/policy/current.json > "$tmp" && [[ -f "$tmp" ]] && mv "$tmp" .well-known/policy/current.json || true
+
+# ensure bounds has safety defaults (needed by propose_step)
+tmpb=".well-known/policy/bounds.json.tmp"
+jq '.safety = (.safety // {}) | .safety.max_param_delta_per_update = (.safety.max_param_delta_per_update // 0.1)' \
+  .well-known/policy/bounds.json > "$tmpb" && mv "$tmpb" .well-known/policy/bounds.json || true
