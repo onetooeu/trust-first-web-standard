@@ -28,3 +28,13 @@ jq '.params = (.params // {})
 tmpb=".well-known/policy/bounds.json.tmp"
 jq '.safety = (.safety // {}) | .safety.max_param_delta_per_update = (.safety.max_param_delta_per_update // 0.1)' \
   .well-known/policy/bounds.json > "$tmpb" && mv "$tmpb" .well-known/policy/bounds.json || true
+
+# ensure bounds has params ranges (needed by propose_step)
+tmpb=".well-known/policy/bounds.json.tmp"
+jq '.params = (.params // {})
+    | .params.w_signature = (.params.w_signature // {"min":0,"max":5})
+    | .params.w_domain = (.params.w_domain // {"min":0,"max":5})
+    | .params.w_history = (.params.w_history // {"min":0,"max":5})
+    | .params.w_revocation = (.params.w_revocation // {"min":0,"max":5})
+    | .params.w_continuity_days = (.params.w_continuity_days // {"min":0,"max":365})
+  ' .well-known/policy/bounds.json > "$tmpb" && mv "$tmpb" .well-known/policy/bounds.json || true
