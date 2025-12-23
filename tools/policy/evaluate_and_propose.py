@@ -133,7 +133,7 @@ def main():
     model = json.load(open(args.model, "r", encoding="utf-8"))
     dataset = json.load(open(args.dataset, "r", encoding="utf-8"))
 
-    base_params = policy["params"]
+    base_params = policy.get("params", {})
     if not within_bounds(base_params, bounds):
         raise SystemExit("Baseline params not within bounds")
 
