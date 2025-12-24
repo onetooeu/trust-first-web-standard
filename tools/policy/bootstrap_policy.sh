@@ -11,7 +11,6 @@ mkdir -p .well-known/policy .well-known/policy/sigs dumps dumps/sigs
 [ -f dumps/sha256.json ] || echo '{}' > dumps/sha256.json
 echo "OK: bootstrap_policy done"
 
-mv .well-known/policy/current.json.tmp .well-known/policy/current.json
 
 # ensure required params exist even if current.json already existed
 tmp=".well-known/policy/current.json.tmp"
@@ -45,3 +44,12 @@ jq '.params = (.params // {})
     | .params.w_transparency_proof = (.params.w_transparency_proof // {"min":0,"max":5})
     | .params.w_auditability = (.params.w_auditability // {"min":0,"max":5})
   ' .well-known/policy/bounds.json > "$tmpb2" && mv "$tmpb2" .well-known/policy/bounds.json || true
+# ensure current has defaults for newer params
+tmpc=".well-known/policy/current.json.tmp"
+jq '.params = (.params // {})
+    | .params.w_transparency_freshness = (.params.w_transparency_freshness // 0)
+    | .params.w_transparency_proof = (.params.w_transparency_proof // 0)
+    | .params.w_auditability = (.params.w_auditability // 0)
+    | .params.threshold_allow = (.params.threshold_allow // 0)
+    | .params.threshold_deny = (.params.threshold_deny // 0)
+  ' .well-known/policy/current.json > "$tmpc" && mv "$tmpc" .well-known/policy/current.json || rm -f "$tmpc"
