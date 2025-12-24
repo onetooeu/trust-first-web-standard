@@ -48,3 +48,8 @@ python3 scripts/generate_dumps.py
 bash scripts/verify_local.sh
 
 > 🔖 Closure snapshot tag: `v1x-closure` (points to the frozen v1.x closure commit)
+
+---
+
+### 🔒 TFWS v1.x Closure (Frozen)
+TFWS **v1.x is complete and long-term frozen** (effective **2025-12-24**). Canonical closure docs: `docs/closure/` • Closure snapshot tag: `v1x-closure` • Audit report: `docs/closure/AUDIT_REPORT_v1x-closure.txt`.
