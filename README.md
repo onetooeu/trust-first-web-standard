@@ -35,3 +35,8 @@ bash scripts/verify_local.sh
 ## CI signing
 
 See `docs/CI-SIGNING.md`.
+
+> ⚠️ TFWS v1.8.3 is **complete** and **long-term frozen**.  
+> See `docs/closure/TRUST_CLOSURE_STATEMENT.md`.
+
+
