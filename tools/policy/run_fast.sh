@@ -50,15 +50,6 @@ if [[ "$PUBLISH" == "1" ]]; then
   say "== publish/sign =="
   KID="$KID" tools/policy/publish_policy.sh
 fi
-      verify_one "$f" ".well-known/policy/sigs/$(basename "$f").$KID.minisig" || true
-    done
-    verify_one "dumps/sha256.json" "dumps/sigs/sha256.json.$KID.minisig" || true
-  else
-    echo "NO_PUBKEY: .well-known/minisign.pub missing?"
-  fi
-fi
-
-echo "OK: run_fast finished"
 
 if [[ "${VERIFY:-1}" == "1" ]]; then
   say "== verify signatures =="
