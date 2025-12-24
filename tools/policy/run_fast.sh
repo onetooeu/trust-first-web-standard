@@ -1,42 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
 KID="${KID:-k1-provider}"
 QUIET="${QUIET:-1}"
 EVAL="${EVAL:-1}"
 PUBLISH="${PUBLISH:-1}"
 VERIFY="${VERIFY:-1}"
 VERIFY_ONLY="${VERIFY_ONLY:-0}"
+VERIFY_STRICT="${VERIFY_STRICT:-0}"
 export KID
 export MINISIGN_SECRET="${MINISIGN_SECRET:-$HOME/.minisign/minisign.key}"
 PUB="$(sed -n '2p' .well-known/minisign.pub 2>/dev/null || true)"
+
 say(){ [[ "$QUIET" == "1" ]] || echo "$@"; }
-say "== bootstrap ==" 
-tools/policy/bootstrap_check.sh || true
-tools/policy/bootstrap_policy.sh || true
-if [[ "$VERIFY_ONLY" == "1" ]]; then
-  EVAL=0
-  PUBLISH=0
-  say "== verify-only mode ==" 
-fi
-if [[ "$EVAL" == "1" ]]; then
-  say "== eval/propose ==" 
-  (python3 tools/policy/evaluate_and_propose.py >/dev/null 2>&1) || python3 tools/policy/evaluate_and_propose.py || true
-fi
-if [[ "$PUBLISH" == "1" ]]; then
-  say "== publish/sign ==" 
-  KID="$KID" tools/policy/publish_policy.sh
-fi
-if [[ "$VERIFY" == "1" ]]; then
-  say "== verify signatures ==" 
-  if [[ -n "$PUB" ]]; then
-    for f in .well-known/policy/core.json .well-known/policy/bounds.json .well-known/policy/current.json .well-known/policy/changelog.json .well-known/policy/audit.merkle.json .well-known/policy/safety.switches.json .well-known/policy/history.index.json .well-known/policy/quorum.json; do
-      verify_one "$f" ".well-known/policy/sigs/$(basename "$f").$KID.minisig"
-    done
-    verify_one "dumps/sha256.json" "dumps/sigs/sha256.json.$KID.minisig" || true
-  fi
-fi
-echo "OK: run_fast finished"
-VERIFY_STRICT="${VERIFY_STRICT:-0}"
 
 # --- safe verify helper (doesn't kill script unless VERIFY_STRICT=1) ---
 verify_one() {
@@ -54,3 +30,56 @@ verify_one() {
   echo "BAD_SIG     : $sig"
   [[ "$VERIFY_STRICT" == "1" ]] && return 4 || return 0
 }
+
+say "== bootstrap =="
+tools/policy/bootstrap_check.sh || true
+tools/policy/bootstrap_policy.sh || true
+
+if [[ "$VERIFY_ONLY" == "1" ]]; then
+  EVAL=0
+  PUBLISH=0
+  say "== verify-only mode =="
+fi
+
+if [[ "$EVAL" == "1" ]]; then
+  say "== eval/propose =="
+  (python3 tools/policy/evaluate_and_propose.py >/dev/null 2>&1) || python3 tools/policy/evaluate_and_propose.py || true
+fi
+
+if [[ "$PUBLISH" == "1" ]]; then
+  say "== publish/sign =="
+  KID="$KID" tools/policy/publish_policy.sh
+fi
+      verify_one "$f" ".well-known/policy/sigs/$(basename "$f").$KID.minisig" || true
+    done
+    verify_one "dumps/sha256.json" "dumps/sigs/sha256.json.$KID.minisig" || true
+  else
+    echo "NO_PUBKEY: .well-known/minisign.pub missing?"
+  fi
+fi
+
+echo "OK: run_fast finished"
+
+if [[ "${VERIFY:-1}" == "1" ]]; then
+  say "== verify signatures =="
+  if [[ -n "${PUB:-}" ]]; then
+    for f in \
+      .well-known/policy/core.json \
+      .well-known/policy/bounds.json \
+      .well-known/policy/current.json \
+      .well-known/policy/changelog.json \
+      .well-known/policy/audit.merkle.json \
+      .well-known/policy/safety.switches.json \
+      .well-known/policy/history.index.json \
+      .well-known/policy/quorum.json
+    do
+      verify_one "$f" ".well-known/policy/sigs/$(basename "$f").$KID.minisig" || true
+    done
+
+    verify_one "dumps/sha256.json" "dumps/sigs/sha256.json.$KID.minisig" || true
+  else
+    echo "NO_PUBKEY: .well-known/minisign.pub missing?"
+  fi
+fi
+
+echo "OK: run_fast finished"
