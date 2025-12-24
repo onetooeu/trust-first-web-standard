@@ -5,7 +5,6 @@ echo "== SIGN CEREMONY =="
 echo "Trusted operator step. This may prompt for minisign password."
 echo
 
-# Require clean working tree (prevents signing over uncommitted changes)
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   if [[ -n "$(git status --porcelain)" ]]; then
     echo "WORKTREE_NOT_CLEAN: commit/stash changes before signing." >&2
@@ -13,7 +12,6 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   fi
 fi
 
-# Optional guard: require KID for production
 if [[ "${REQUIRE_KID:-0}" = "1" && -z "${KID:-}" ]]; then
   echo "REQUIRE_KID: set KID=... for production publishes" >&2
   exit 31
