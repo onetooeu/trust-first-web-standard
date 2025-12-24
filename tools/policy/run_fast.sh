@@ -15,11 +15,12 @@ export KID
 export MINISIGN_SECRET="${MINISIGN_SECRET:-$HOME/.minisign/minisign.key}"
 PUB="$(sed -n '2p' .well-known/minisign.pub 2>/dev/null || true)"
 
-# verify-only: skip bootstrap/eval/publish
+# v1.8+: verify-only mode (no signing, no publish)
 if [[ "$VERIFY_ONLY" == "1" ]]; then
-  BOOTSTRAP=0
-  EVAL=0
-  PUBLISH=0
+  tools/policy/preflight.sh
+  tools/policy/verify_only.sh
+  echo "OK: run_fast finished"
+  exit 0
 fi
 
 say(){ [[ "$QUIET" == "1" ]] || echo "$@"; }
