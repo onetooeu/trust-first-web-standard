@@ -1,0 +1,1 @@
+{"actions":[],"created_utc":"2025-12-23T19:04:27Z","from_policy_version":"1.0.0+2025-12-23.1","notes":"placeholder","policy_id":"onetoo.eu/trust-policy","schema":"tfws-ap.rollback.plan.v1","to_policy_version":"1.0.0+2025-12-23.1","trigger":{"metrics_snapshot_hash_sha256":"REPLACE","reason":"none"}}

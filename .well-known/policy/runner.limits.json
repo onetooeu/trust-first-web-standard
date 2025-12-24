@@ -1,0 +1,1 @@
+{"enforcement":{"clock_source":"utc","count_window":"utc_day","require_metrics_snapshot":true,"require_proposal":true},"limits":{"max_days_back":14,"max_rollbacks_per_day":2,"max_updates_per_day":4,"min_hours_between_updates":3},"policy_id":"onetoo.eu/trust-policy","schema":"tfws-ap.runner.limits.v1"}
