@@ -151,6 +151,7 @@ def main():
     candidate_policy = copy.deepcopy(policy)
     candidate_policy["policy_version"] = bump_version(policy["policy_version"])
     candidate_policy["effective_utc"] = utc_now()
+    candidate_policy.setdefault("derived_from", {})
     candidate_policy["derived_from"]["previous_policy_version"] = policy["policy_version"]
     candidate_policy["params"] = cand_params
     candidate_policy["validation"]["regression_ok"] = regression_ok
