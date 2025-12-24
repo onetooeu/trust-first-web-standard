@@ -8,3 +8,4 @@ TFWS v1.8.3 is finalized and long-term frozen.
 - Release notes: `docs/closure/RELEASE_NOTES_v1.8.3.md`
 
 Future work must start as TFWS v2.x.
+
