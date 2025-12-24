@@ -152,6 +152,12 @@ echo "== Sign policy artifacts =="
   minisign -Vm "$POLICY_DIR/current.json" -P "$PUB" -x "$SIG_CURRENT" >/dev/null || { echo "BAD_SIG: $(basename \"$SIG_CURRENT\")"; exit 4; }
 for f in "$POLICY_DIR"/*.json; do
   base="$(basename "$f")"
+
+  # Variant A: never sign ephemeral verification report
+  if [[ "$base" == "verification.report.json" ]]; then
+    continue
+  fi
+
   if [[ -n "$KID" ]]; then
     sign_file "$f" "$SIGS_DIR/$base.$KID.minisig"
   else
