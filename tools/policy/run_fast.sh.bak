@@ -30,27 +30,9 @@ if [[ "$VERIFY" == "1" ]]; then
   say "== verify signatures ==" 
   if [[ -n "$PUB" ]]; then
     for f in .well-known/policy/core.json .well-known/policy/bounds.json .well-known/policy/current.json .well-known/policy/changelog.json .well-known/policy/audit.merkle.json .well-known/policy/safety.switches.json .well-known/policy/history.index.json .well-known/policy/quorum.json; do
-      verify_one "$f" ".well-known/policy/sigs/$(basename "$f").$KID.minisig"
+      minisign -Vm "$f" -P "$PUB" -x ".well-known/policy/sigs/$(basename "$f").$KID.minisig" >/dev/null
     done
-    verify_one "dumps/sha256.json" "dumps/sigs/sha256.json.$KID.minisig" || true
+    minisign -Vm dumps/sha256.json -P "$PUB" -x "dumps/sigs/sha256.json.$KID.minisig" >/dev/null || true
   fi
 fi
 echo "OK: run_fast finished"
-VERIFY_STRICT="${VERIFY_STRICT:-0}"
-
-# --- safe verify helper (doesn't kill script unless VERIFY_STRICT=1) ---
-verify_one() {
-  local f="$1"
-  local sig="$2"
-  if [[ ! -f "$f" ]]; then
-    echo "MISSING_FILE: $f"
-    [[ "$VERIFY_STRICT" == "1" ]] && return 2 || return 0
-  fi
-  if [[ ! -f "$sig" ]]; then
-    echo "MISSING_SIG : $sig"
-    [[ "$VERIFY_STRICT" == "1" ]] && return 3 || return 0
-  fi
-  minisign -Vm "$f" -P "$PUB" -x "$sig" >/dev/null && return 0
-  echo "BAD_SIG     : $sig"
-  [[ "$VERIFY_STRICT" == "1" ]] && return 4 || return 0
-}
