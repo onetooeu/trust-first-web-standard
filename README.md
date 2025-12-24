@@ -46,3 +46,5 @@ This repository is a **static, audit-friendly trust & governance hub** designed 
 ```bash
 python3 scripts/generate_dumps.py
 bash scripts/verify_local.sh
+
+> 🔖 Closure snapshot tag: `v1x-closure` (points to the frozen v1.x closure commit)
