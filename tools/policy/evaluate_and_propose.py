@@ -154,6 +154,7 @@ def main():
     candidate_policy.setdefault("derived_from", {})
     candidate_policy["derived_from"]["previous_policy_version"] = policy["policy_version"]
     candidate_policy["params"] = cand_params
+    candidate_policy.setdefault("validation", {})
     candidate_policy["validation"]["regression_ok"] = regression_ok
     candidate_hash = sha256_bytes(canonical_json(candidate_policy))
 
