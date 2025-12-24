@@ -53,3 +53,8 @@ jq '.params = (.params // {})
     | .params.threshold_allow = (.params.threshold_allow // 0)
     | .params.threshold_deny = (.params.threshold_deny // 0)
   ' .well-known/policy/current.json > "$tmpc" && mv "$tmpc" .well-known/policy/current.json || rm -f "$tmpc"
+
+# ensure bounds_version exists
+tmpbv=".well-known/policy/bounds.json.tmp"
+jq '.bounds_version = (.bounds_version // "0.0.0+bootstrap")' \
+  .well-known/policy/bounds.json > "$tmpbv" && mv "$tmpbv" .well-known/policy/bounds.json || rm -f "$tmpbv"
