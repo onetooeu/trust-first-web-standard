@@ -1,0 +1,7 @@
+Archive signature note
+
+The file archive/tfws-v1x-closure-source-76ec3f1-2025-12-24.zip.minisig is intentionally not committed.
+Reason: repository does not carry the corresponding .zip payload; signature is kept locally for offline provenance checks.
+
+Verification command:
+minisign -Vm archive/tfws-v1x-closure-source-76ec3f1-2025-12-24.zip -P <PUB> -x archive/tfws-v1x-closure-source-76ec3f1-2025-12-24.zip.minisig
