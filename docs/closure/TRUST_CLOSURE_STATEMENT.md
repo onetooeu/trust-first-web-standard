@@ -1,6 +1,4 @@
-🔒 FINÁLNY OFICIÁLNY TEXT
-docs/closure/TRUST_CLOSURE_STATEMENT.md
-# Trust Closure Statement — TFWS v1.8.3
+# Trust Closure Statement — TFWS v1.x
 
 **Status:** FINAL / CLOSED  
 **Scope:** Trust-First Web Standard (TFWS) v1.x series (v1.0.0 through v1.8.3)  
