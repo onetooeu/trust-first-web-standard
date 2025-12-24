@@ -15,3 +15,4 @@ onetoo-keys/
 *.zip.sha256
 *-workingtree-*.sha256
 .well-known/policy/verification.report.json
+main
