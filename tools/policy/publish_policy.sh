@@ -136,6 +136,20 @@ append_audit_event "$POLICY_DIR/audit.merkle.json" "/.well-known/policy/current.
 canon_json "$POLICY_DIR/audit.merkle.json"
 
 echo "== Sign policy artifacts =="
+
+  # ---- HARD VERIFY (bounds/current) right after signing ----
+  PUB="$(awk 'NF{gsub(//,""); if($0 ~ /^RW[0-9A-Za-z+/=]+$/){print; exit}}' .well-known/minisign.pub)"
+  [[ -n "$PUB" ]] || { echo "NO_PUBKEY: .well-known/minisign.pub missing?"; exit 2; }
+  if [[ -n "${KID:-}" ]]; then
+    SIG_BOUNDS="$SIGS_DIR/bounds.json.$KID.minisig"
+    SIG_CURRENT="$SIGS_DIR/current.json.$KID.minisig"
+  else
+    SIG_BOUNDS="$SIGS_DIR/bounds.json.minisig"
+    SIG_CURRENT="$SIGS_DIR/current.json.minisig"
+  fi
+  echo "== Verify critical policy signatures (hard) =="
+  minisign -Vm "$POLICY_DIR/bounds.json"  -P "$PUB" -x "$SIG_BOUNDS"  >/dev/null || { echo "BAD_SIG: $(basename \"$SIG_BOUNDS\")";  exit 3; }
+  minisign -Vm "$POLICY_DIR/current.json" -P "$PUB" -x "$SIG_CURRENT" >/dev/null || { echo "BAD_SIG: $(basename \"$SIG_CURRENT\")"; exit 4; }
 for f in "$POLICY_DIR"/*.json; do
   base="$(basename "$f")"
   if [[ -n "$KID" ]]; then
@@ -144,20 +158,10 @@ for f in "$POLICY_DIR"/*.json; do
     sign_file "$f" "$SIGS_DIR/$base.minisig"
   fi
 done
-PUB="$(sed -n '2p' .well-known/minisign.pub 2>/dev/null || true)"
+  PUB="$(awk 'NF{gsub(//,""); if($0 ~ /^RW[0-9A-Za-z+/=]+$/){print; exit}}' .well-known/minisign.pub)"
 SIG_BOUNDS="/bounds.json..minisig"; SIG_BOUNDS=""
 SIG_CURRENT="/current.json..minisig"; SIG_CURRENT=""
 SIG_SHA256="/sigs/sha256.json..minisig"; SIG_SHA256=""
-
-echo "== Verify critical policy signatures (hard) =="
-
-[[ -n "$PUB" ]] || { echo "NO_PUBKEY: .well-known/minisign.pub missing?"; exit 2; }
-
-minisign -Vm "$POLICY_DIR/bounds.json"  -P "$PUB" -x "$SIG_BOUNDS"  >/dev/null || { echo "BAD_SIG: bounds.json.$KID.minisig";  exit 3; }
-
-minisign -Vm "$POLICY_DIR/current.json" -P "$PUB" -x "$SIG_CURRENT" >/dev/null || { echo "BAD_SIG: current.json.$KID.minisig"; exit 4; }
-minisign -Vm "/sha256.json" -P "RWQz9jejZk1EqLbIwya/36RD7hGVxJg2E6uzA1KzNRVrG1NPc1/kXYA0" -x "/sigs/sha256.json..minisig" >/dev/null || { echo "BAD_SIG: sha256.json..minisig"; exit 5; }
-
 
 echo "== Update dumps/sha256.json + sign =="
 update_dumps_sha256 "$DUMPS_DIR/sha256.json"
