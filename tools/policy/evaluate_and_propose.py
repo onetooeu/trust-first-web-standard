@@ -193,7 +193,7 @@ def main():
         "to_policy_version": candidate_policy["policy_version"],
         "inputs": {
             "bounds_version": bounds.get("bounds_version","0.0.0+bootstrap"),
-            "core_version": policy["derived_from"]["core_version"],
+            "core_version": policy.get("derived_from",{}).get("core_version","0.0.0+bootstrap"),
             "metrics_snapshot_hash_sha256": metrics_snapshot["snapshot_hash_sha256"]
         },
         "param_deltas": deltas,

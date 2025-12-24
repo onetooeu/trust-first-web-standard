@@ -58,3 +58,8 @@ jq '.params = (.params // {})
 tmpbv=".well-known/policy/bounds.json.tmp"
 jq '.bounds_version = (.bounds_version // "0.0.0+bootstrap")' \
   .well-known/policy/bounds.json > "$tmpbv" && mv "$tmpbv" .well-known/policy/bounds.json || rm -f "$tmpbv"
+
+# ensure derived_from exists in current policy (bootstrap seed)
+tmpdf=".well-known/policy/current.json.tmp"
+jq '.derived_from = (.derived_from // {"core_version":"0.0.0+bootstrap","core_id":"core@bootstrap"})' \
+  .well-known/policy/current.json > "$tmpdf" && mv "$tmpdf" .well-known/policy/current.json || rm -f "$tmpdf"
