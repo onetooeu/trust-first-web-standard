@@ -1,0 +1,4 @@
+# TFWS policy files must stay LF (avoid CRLF issues)
+.well-known/policy/*.json text eol=lf
+.well-known/policy/sigs/*.minisig text eol=lf
+.well-known/policy/*.minisig text eol=lf

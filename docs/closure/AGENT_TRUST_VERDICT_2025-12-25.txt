@@ -1,0 +1,31 @@
+TFWS Agent Trust Verdict (Local Simulation)
+
+Date (local): 2025-12-25
+Repo: onetoo-tfws-ap-repo2
+Root: .well-known/
+
+Identity root:
+- Public key extracted from .well-known/minisign.pub (RW…)
+- Verified signing key match using minisign (secret key stored outside repo)
+
+Level 1 (critical signature verification):
+- Verified (k1-provider signatures):
+  - .well-known/policy/bounds.json
+  - .well-known/policy/current.json
+  - .well-known/policy/policy.bundle.json
+
+Level 2 (bundle inventory integrity):
+- policy.bundle.json contains artifacts[] with sha256 for each policy artifact
+- All artifacts sha256 matched local files after CRLF normalization
+- Self-hash entry for policy.bundle.json was skipped (cyclic by design)
+
+Level 3 (per-artifact signature verification):
+- Verified all signatures referenced by artifacts[].sig_path (*.minisig)
+- Result: 17/17 OK, 1 skipped (bundle self)
+
+Incident & remediation summary:
+- Initial issue: placeholder *.minisig signatures + CRLF (^M) in bundle paths caused verification failure.
+- Fix: replace placeholder signatures with real minisign signatures and normalize CRLF.
+
+Final verdict:
+TRUST_ESTABLISHED + INVENTORY_CONSISTENT + ALL_ARTIFACT_SIGNATURES_VALID

@@ -16,3 +16,7 @@ onetoo-keys/
 *-workingtree-*.sha256
 .well-known/policy/verification.report.json
 main
+
+# local backups (do not commit)
+.well-known/policy/*.bak.*
+archive/*.minisig

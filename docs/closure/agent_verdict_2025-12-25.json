@@ -1,0 +1,23 @@
+{
+  "ts_utc": "2025-12-24T23:05:21Z",
+  "root": "local-repo:~/Downloads/onetoo-tfws-ap-repo2",
+  "pubkey": "RWQz9jejZk1EqLbIwya/36RD7hGVxJg2E6uzA1KzNRVrG1NPc1/kXYA0",
+  "kid": "k1-provider",
+  "artifacts": {
+    "bounds": ".well-known/policy/bounds.json",
+    "current": ".well-known/policy/current.json",
+    "bundle": ".well-known/policy/policy.bundle.json",
+    "audit_merkle": ".well-known/policy/audit.merkle.json"
+  },
+  "verified": {
+    "bounds_sig": true,
+    "current_sig": true,
+    "bundle_sig": true,
+    "audit_merkle_sig": true
+  },
+  "decision": "TRUST_ESTABLISHED",
+  "notes": [
+    "All critical policy artifacts verified with minisign -Vm using the published RW public key.",
+    "Agent can now evaluate semantics (bounds vs current) and hash-check members listed in bundle."
+  ]
+}

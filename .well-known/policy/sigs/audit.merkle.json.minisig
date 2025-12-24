@@ -1,2 +1,4 @@
-untrusted comment: PLACEHOLDER SIGNATURE (minisign unavailable)
-a79798c1a58e67bce14c6636b76a84882f488dfaeef88399085c9a7534fbb742
+untrusted comment: signature from minisign secret key
+RUQz9jejZk1EqBfL+DDgetWTWY5Wmng+mTZn74w67t2K0oX9E0NMRZRe2EbO2SThULdhy0wnSFfd4yi0/vfoDQ27+IyMGW2EZgk=
+trusted comment: timestamp:1766619011	file:.well-known/policy/audit.merkle.json	hashed
+5NbdcBMHchZ1pubhfncFWJb6nFKo4CRX11Xh/nZADiK+OzxdDSiGwO3qwycPWXdMfGg+GhNznVdnmEvtsPhKBw==

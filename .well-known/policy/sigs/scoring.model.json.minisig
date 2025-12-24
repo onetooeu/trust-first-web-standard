@@ -1,2 +1,4 @@
-untrusted comment: PLACEHOLDER SIGNATURE (minisign unavailable)
-0a44a2853a61224790defa3520278995a541c95936d607977245fa3fbecb8337
+untrusted comment: signature from minisign secret key
+RUQz9jejZk1EqICc6/scxvYcN0h1FxPekFK/2jTLtGKlEHA1oI6gnSnln5v/q9QfEVkXry2p90Gm72UqrM/TlV+B9xsRwZIopA0=
+trusted comment: timestamp:1766619516	file:.well-known/policy/scoring.model.json	hashed
+vEvKeEXQPqFFJJJefILdfT+kYToK9VOGpB+Z2duAYQRlD9FeB9SpF5Jjhd3PXnvSchM5F0n+vLoxhp8Vv/MeBA==
