@@ -1,0 +1,21 @@
+== Download closure snapshot assets ==
+-rw-r--r-- 1 TV 197121 1511661 Dec 24 23:17 tfws-v1x-closure-source-76ec3f1-2025-12-24.zip
+-rw-r--r-- 1 TV 197121     353 Dec 24 23:17 tfws-v1x-closure-source-76ec3f1-2025-12-24.zip.minisig
+-rw-r--r-- 1 TV 197121     121 Dec 24 23:17 tfws-v1x-closure-source-76ec3f1-2025-12-24.zip.sha256
+
+== SHA256 verify (local regenerated) ==
+75b440fd7f55a24ef8f8b8ddbeae4cb69b7e34397c01b7a7b390a5d32b686ff6 *tfws-v1x-closure-source-76ec3f1-2025-12-24.zip
+tfws-v1x-closure-source-76ec3f1-2025-12-24.zip: OK
+
+== Minisign verify ==
+Signature and comment signature verified
+Trusted comment: timestamp:1766613556	file:archive/tfws-v1x-closure-source-76ec3f1-2025-12-24.zip	hashed
+
+== Repo tag sanity ==
+tag v1x-closure
+
+TFWS v1.x closure snapshot (docs/closure complete; long-term frozen)
+76ec3f1 docs: finalize TFWS v1.x completion marker
+d7c763e docs: add closure snapshot tag reference to README
+
+OK: closure snapshot audit passed
