@@ -22,7 +22,7 @@ jq '.params = (.params // {})
     | .params.w_revocation = (.params.w_revocation // 1)
     | .params.w_continuity_days = (.params.w_continuity_days // 0)
     | .params.threshold_allow = (.params.threshold_allow // 0)
-  ' .well-known/policy/current.json > "$tmp" && [[ -f "$tmp" ]] && mv "$tmp" .well-known/policy/current.json || true
+  ' .well-known/policy/current.json > "$tmp" && [[ -f "$tmp" ]] && [[ -f "$tmp" ]] && mv "$tmp" .well-known/policy/current.json || true || true
 
 # ensure bounds has safety defaults (needed by propose_step)
 tmpb=".well-known/policy/bounds.json.tmp"
@@ -38,3 +38,10 @@ jq '.params = (.params // {})
     | .params.w_revocation = (.params.w_revocation // {"min":0,"max":5})
     | .params.w_continuity_days = (.params.w_continuity_days // {"min":0,"max":365})
   ' .well-known/policy/bounds.json > "$tmpb" && mv "$tmpb" .well-known/policy/bounds.json || true
+# extend bounds param ranges for transparency knobs
+tmpb2=".well-known/policy/bounds.json.tmp"
+jq '.params = (.params // {})
+    | .params.w_transparency_freshness = (.params.w_transparency_freshness // {"min":0,"max":5})
+    | .params.w_transparency_proof = (.params.w_transparency_proof // {"min":0,"max":5})
+    | .params.w_auditability = (.params.w_auditability // {"min":0,"max":5})
+  ' .well-known/policy/bounds.json > "$tmpb2" && mv "$tmpb2" .well-known/policy/bounds.json || true
