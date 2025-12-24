@@ -138,7 +138,7 @@ canon_json "$POLICY_DIR/audit.merkle.json"
 echo "== Sign policy artifacts =="
 
   # ---- HARD VERIFY (bounds/current) right after signing ----
-  PUB="$(awk 'NF{gsub(//,""); if($0 ~ /^RW[0-9A-Za-z+/=]+$/){print; exit}}' .well-known/minisign.pub)"
+  PUB="$(awk 'NF{gsub(/\r/,""); if($0 ~ /^RW[0-9A-Za-z+\/=]+$/){print; exit}}' .well-known/minisign.pub)"
   [[ -n "$PUB" ]] || { echo "NO_PUBKEY: .well-known/minisign.pub missing?"; exit 2; }
   if [[ -n "${KID:-}" ]]; then
     SIG_BOUNDS="$SIGS_DIR/bounds.json.$KID.minisig"
@@ -164,10 +164,6 @@ for f in "$POLICY_DIR"/*.json; do
     sign_file "$f" "$SIGS_DIR/$base.minisig"
   fi
 done
-  PUB="$(awk 'NF{gsub(//,""); if($0 ~ /^RW[0-9A-Za-z+/=]+$/){print; exit}}' .well-known/minisign.pub)"
-SIG_BOUNDS="/bounds.json..minisig"; SIG_BOUNDS=""
-SIG_CURRENT="/current.json..minisig"; SIG_CURRENT=""
-SIG_SHA256="/sigs/sha256.json..minisig"; SIG_SHA256=""
 
 echo "== Update dumps/sha256.json + sign =="
 update_dumps_sha256 "$DUMPS_DIR/sha256.json"
