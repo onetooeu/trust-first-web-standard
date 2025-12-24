@@ -1,10 +1,21 @@
-# Trust Closure Statement – TFWS v1.x
+# Trust Closure Statement — TFWS v1.8.3
 
-This document formally declares the closure of the Trust-First Web Standard v1.x series.
+This document formally declares the closure of the Trust-First Web Standard (TFWS) **v1.x** series.
 
-All cryptographic mechanisms, verification rules, and trust semantics defined in v1.x
-are considered stable, complete, and final.
+## Status
+TFWS v1.8.3 is **stable, complete, and final**.  
+All cryptographic mechanisms, verification rules, policy semantics, and published trust signals defined by v1.x are considered **closed**.
 
-No backward-affecting changes are planned.
+## Change policy
+No changes are planned that would:
+- alter the meaning of any v1.x trust signal,
+- invalidate existing signed artifacts,
+- or introduce backward-affecting behavior.
 
-Signed releases and artifacts remain valid indefinitely.
+Operational updates (CI, mirrors, hosting, documentation formatting) may occur, but must not change v1.x semantics.
+
+## Validity
+Signed releases and signed artifacts produced under TFWS v1.x remain valid indefinitely, subject to correct key verification and published key history.
+
+## Future evolution
+Any future evolution must start as **TFWS v2.x** with explicit versioning and migration guidance.
