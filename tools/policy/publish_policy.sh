@@ -144,6 +144,20 @@ for f in "$POLICY_DIR"/*.json; do
     sign_file "$f" "$SIGS_DIR/$base.minisig"
   fi
 done
+PUB="$(sed -n '2p' .well-known/minisign.pub 2>/dev/null || true)"
+SIG_BOUNDS="/bounds.json..minisig"; SIG_BOUNDS=""
+SIG_CURRENT="/current.json..minisig"; SIG_CURRENT=""
+SIG_SHA256="/sigs/sha256.json..minisig"; SIG_SHA256=""
+
+echo "== Verify critical policy signatures (hard) =="
+
+[[ -n "$PUB" ]] || { echo "NO_PUBKEY: .well-known/minisign.pub missing?"; exit 2; }
+
+minisign -Vm "$POLICY_DIR/bounds.json"  -P "$PUB" -x "$SIG_BOUNDS"  >/dev/null || { echo "BAD_SIG: bounds.json.$KID.minisig";  exit 3; }
+
+minisign -Vm "$POLICY_DIR/current.json" -P "$PUB" -x "$SIG_CURRENT" >/dev/null || { echo "BAD_SIG: current.json.$KID.minisig"; exit 4; }
+minisign -Vm "/sha256.json" -P "RWQz9jejZk1EqLbIwya/36RD7hGVxJg2E6uzA1KzNRVrG1NPc1/kXYA0" -x "/sigs/sha256.json..minisig" >/dev/null || { echo "BAD_SIG: sha256.json..minisig"; exit 5; }
+
 
 echo "== Update dumps/sha256.json + sign =="
 update_dumps_sha256 "$DUMPS_DIR/sha256.json"
