@@ -21,14 +21,6 @@ if [[ "${VERIFY_ONLY:-0}" == "1" ]]; then
 fi
 
 
-# verify-only: skip bootstrap/eval/publish
-if [[ "${VERIFY_ONLY:-0}" == "1" ]]; then
-  EVAL=0
-  PUBLISH=0
-  BOOTSTRAP=0
-fi
-
-
 say(){ [[ "$QUIET" == "1" ]] || echo "$@"; }
 
 # --- safe verify helper (doesn't kill script unless VERIFY_STRICT=1) ---
