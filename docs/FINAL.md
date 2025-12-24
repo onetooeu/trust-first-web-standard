@@ -1,3 +1,5 @@
+⚠️ TFWS v1.x is COMPLETE and LONG-TERM FROZEN — see `docs/closure/TRUST_CLOSURE_STATEMENT.md`.
+
 # ONETOO Trust Hub — Final release
 
 This repository snapshot is intended as a long-lived, stable trust hub for **onetoo.eu**.
