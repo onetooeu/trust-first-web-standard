@@ -1,5 +1,7 @@
 # ONETOO.eu — AI Trust Hub
 
+> ⚠️ **TFWS v1.x is COMPLETE and LONG-TERM FROZEN** — canonical closure: `docs/closure/TRUST_CLOSURE_STATEMENT.md` (final release tooling: `v1.8.3`).
+
 This repository is a **static, audit-friendly trust & governance hub** designed for:
 - AI agents (machine-readable trust manifest + OpenAPI)
 - partners & auditors (verification, integrity inventory, incident & changelog rails)
