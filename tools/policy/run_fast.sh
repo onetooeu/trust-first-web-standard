@@ -5,12 +5,29 @@ KID="${KID:-k1-provider}"
 QUIET="${QUIET:-1}"
 EVAL="${EVAL:-1}"
 PUBLISH="${PUBLISH:-1}"
+BOOTSTRAP="${BOOTSTRAP:-1}"
 VERIFY="${VERIFY:-1}"
 VERIFY_ONLY="${VERIFY_ONLY:-0}"
 VERIFY_STRICT="${VERIFY_STRICT:-0}"
 export KID
 export MINISIGN_SECRET="${MINISIGN_SECRET:-$HOME/.minisign/minisign.key}"
 PUB="$(sed -n '2p' .well-known/minisign.pub 2>/dev/null || true)"
+
+# verify-only: skip bootstrap/eval/publish
+if [[ "${VERIFY_ONLY:-0}" == "1" ]]; then
+  EVAL=0
+  PUBLISH=0
+  BOOTSTRAP=0
+fi
+
+
+# verify-only: skip bootstrap/eval/publish
+if [[ "${VERIFY_ONLY:-0}" == "1" ]]; then
+  EVAL=0
+  PUBLISH=0
+  BOOTSTRAP=0
+fi
+
 
 say(){ [[ "$QUIET" == "1" ]] || echo "$@"; }
 
@@ -20,26 +37,25 @@ verify_one() {
   local sig="$2"
   if [[ ! -f "$f" ]]; then
     echo "MISSING_FILE: $f"
-    [[ "$VERIFY_STRICT" == "1" ]] && return 2 || return 0
+    [[ "${VERIFY_STRICT:-0}" == "1" ]] && return 2 || return 0
   fi
   if [[ ! -f "$sig" ]]; then
     echo "MISSING_SIG : $sig"
-    [[ "$VERIFY_STRICT" == "1" ]] && return 3 || return 0
+    [[ "${VERIFY_STRICT:-0}" == "1" ]] && return 3 || return 0
   fi
   minisign -Vm "$f" -P "$PUB" -x "$sig" >/dev/null && return 0
   echo "BAD_SIG     : $sig"
-  [[ "$VERIFY_STRICT" == "1" ]] && return 4 || return 0
+  [[ "${VERIFY_STRICT:-0}" == "1" ]] && return 4 || return 0
 }
 
-say "== bootstrap =="
+
+# --- safe verify helper (doesn't kill script unless VERIFY_STRICT=1) ---
+
+if [[ "$BOOTSTRAP" == "1" ]]; then
+say "== bootstrap == "
 tools/policy/bootstrap_check.sh || true
 tools/policy/bootstrap_policy.sh || true
 
-if [[ "$VERIFY_ONLY" == "1" ]]; then
-  EVAL=0
-  PUBLISH=0
-  say "== verify-only mode =="
-fi
 
 if [[ "$EVAL" == "1" ]]; then
   say "== eval/propose =="
@@ -74,3 +90,4 @@ if [[ "${VERIFY:-1}" == "1" ]]; then
 fi
 
 echo "OK: run_fast finished"
+fi
