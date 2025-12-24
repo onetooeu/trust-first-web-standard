@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 import json, hashlib, copy
+import os
+import json, hashlib, copy
 from datetime import datetime, timezone
 
 def utc_now():
@@ -160,7 +162,7 @@ def main():
 
     metrics_snapshot = {
         "schema": "tfws-ap.metrics.snapshot.v1",
-        "policy_id": policy["policy_id"],
+        "policy_id": policy.get("policy_id", os.environ.get("POLICY_ID", "onetoo.eu/trust-policy")),
         "created_utc": utc_now(),
         "dataset": {
             "dataset_id": dataset["dataset_id"],
@@ -185,7 +187,7 @@ def main():
 
     proposal = {
         "schema": "tfws-ap.policy.proposal.v1",
-        "policy_id": policy["policy_id"],
+        "policy_id": policy.get("policy_id", os.environ.get("POLICY_ID", "onetoo.eu/trust-policy")),
         "created_utc": utc_now(),
         "from_policy_version": policy["policy_version"],
         "to_policy_version": candidate_policy["policy_version"],
