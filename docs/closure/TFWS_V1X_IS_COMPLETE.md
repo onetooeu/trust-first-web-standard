@@ -1,34 +1,30 @@
 # TFWS v1.x is Complete
 
 **Status:** COMPLETE  
-**Series:** TFWS v1.x  
-**Final tooling baseline:** v1.8.3  
-**Effective date:** 2025-12-24
+**Series:** Trust-First Web Standard (TFWS) v1.x (v1.0.0 through v1.8.3)  
+**Effective date:** 2025-12-24  
+**Repository:** `onetooeu/trust-first-web-standard`  
+**Canonical closure:** `docs/closure/TRUST_CLOSURE_STATEMENT.md`  
+**Long-term freeze policy:** `docs/closure/LONG_TERM_FROZEN.md`
 
 ## Summary
 
-TFWS v1.x represents a full, self-contained trust and governance baseline for publishing
-static, auditable trust signals with cryptographic integrity.
+TFWS v1.x is declared **complete** and is now maintained under a **long-term frozen** policy.
 
-This series delivers a complete, verifiable foundation that includes:
-- stable canonical endpoints and durable URLs,
-- hash inventories and integrity manifests,
-- minisign-based signing and verification,
-- policy snapshot publication and audit rails,
-- changelog/incident rails for transparency.
+This file exists as a short, high-visibility marker for auditors, integrators, and automated tooling.
 
-## Finalization
+## Practical implications
 
-With the publication of v1.8.3 and the closure documents in `docs/closure/`,
-TFWS v1.x is considered **final** and **long-term frozen**.
+- If you implement TFWS, treat **v1.x semantics and verification rules as stable**.
+- Expect **no backwards-affecting changes** within v1.x.
+- Signed v1.x releases remain valid under the published public keys and verification procedure.
 
-Future work must start as **TFWS v2.x**.
+## Where to go next
 
-## References
+All new functionality or behavior changes must start as **TFWS v2.x**, with explicit versioning and migration guidance.
 
-- Closure statement: `docs/closure/TRUST_CLOSURE_STATEMENT.md`
-- Frozen declaration: `docs/closure/LONG_TERM_FROZEN.md`
-- Release notes: `docs/closure/RELEASE_NOTES_v1.8.3.md`
-- Archive bundle: `archive/trust-first-web-standard-v1.8.3.zip` (+ `.sha256`, `.minisig`)
+## Sign-off
+
+Issued by the TFWS maintainers for the TFWS v1.x series.
 
 — EOF
