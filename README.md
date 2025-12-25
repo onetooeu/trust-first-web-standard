@@ -53,3 +53,5 @@ bash scripts/verify_local.sh
 
 ### 🔒 TFWS v1.x Closure (Frozen)
 TFWS **v1.x is complete and long-term frozen** (effective **2025-12-24**). Canonical closure docs: `docs/closure/` • Closure snapshot tag: `v1x-closure` • Audit report: `docs/closure/AUDIT_REPORT_v1x-closure.txt`.
+
+This repository is cryptographically frozen at tag v1x-closure (2025-12-25).
