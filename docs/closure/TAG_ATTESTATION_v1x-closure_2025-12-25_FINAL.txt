@@ -1,0 +1,10 @@
+TFWS Tag Attestation (Detached Signature)
+
+Tag: v1x-closure
+Commit: 4b849e9b70f87440e1dcd949548319d0132e5672
+Date (UTC): 2025-12-25T00:11:08Z
+
+Statement:
+I attest that the TFWS v1.x closure snapshot is represented by the git tag "v1x-closure"
+pointing to the commit "4b849e9b70f87440e1dcd949548319d0132e5672". This attestation is signed with the TFWS minisign
+provider key whose public component is published in .well-known/minisign.pub.
