@@ -20,3 +20,4 @@ main
 # local backups (do not commit)
 .well-known/policy/*.bak.*
 archive/*.minisig
+_content.sha256.txt
